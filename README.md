@@ -4,22 +4,33 @@ Generate a markdown report of your recent activity on GitHub
 
 ## Usage
 
+Create a [GitHub Personal Access Token](https://github.com/settings/tokens/new?scopes=repo&description=npx%20recent-github-activity) with the `repo` scope, then add it to your environment:
+
 ```
-npx recent-github-activity
+export GITHUB_RECENT_ACTIVITY_PERSONAL_ACCESS_TOKEN="ghp_..."
 ```
 
-The first time you run this command, you'll be asked to log in to GitHub using your password or a personal access token, and the resulting token will be saved to disk for future use using [ghauth](https://github.com/rvagg/ghauth).
+Then run:
+
+```
+npx recent-github-activity <username>
+```
+
+If you specify _your own GitHub username_, you'll see all of your recent activity, both public and private.
+
+If you specify someone else's username, you'll see all of their public activity.
+
 
 You can save the output to a file:
 
 ```
-npx recent-github-activity > recent.md
+npx recent-github-activity zeke > recent.md
 ```
 
 or pipe it right to [`vmd`](https://ghub.io/vmd):
 
 ```
-npx recent-github-activity | npx vmd
+npx recent-github-activity zeke | npx vmd
 ```
 
 This is what a generated report looks like in `vmd`:
