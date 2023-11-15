@@ -9,6 +9,19 @@ const username = args[0]
 main()
 
 async function main () {
+
+  if (!username) {
+    console.error('Usage: github-recent-activity <username>')
+    process.exit(0)
+  }
+
+  if (!process.env.GITHUB_RECENT_ACTIVITY_PERSONAL_ACCESS_TOKEN) {
+    console.error('Error: GITHUB_RECENT_ACTIVITY_PERSONAL_ACCESS_TOKEN is not set\n')
+    console.error('Generate a token at https://github.com/settings/tokens/new?scopes=repo&description=npx%20recent-github-activity\n')
+    console.error('Then run: GITHUB_RECENT_ACTIVITY_PERSONAL_ACCESS_TOKEN=ghp_...')
+    process.exit(0)
+  }
+
   const events = await getEvents(username)
 
   const eventTypes = chain(events)
