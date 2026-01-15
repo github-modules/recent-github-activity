@@ -4,6 +4,12 @@
 - [{{event.repo.name}}#{{event.payload.issue.number}}]({{ event.payload.issue.html_url }}) {{ event.payload.issue.title }} - {{event.timeago}}
 {%- endfor %}
 
+## Merged Pull Requests
+
+{%- for event in mergedPullRequests %}
+- [{{event.repo.name}}#{{event.payload.number}}](https://github.com/{{ event.repo.name }}/pull/{{ event.payload.number }}) {{ event.payload.pull_request.title }} - {{event.timeago}}
+{%- endfor %}
+
 ## Closed Pull Requests
 
 {%- for event in closedPullRequests %}
