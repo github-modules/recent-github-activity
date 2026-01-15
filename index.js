@@ -51,9 +51,16 @@ async function main () {
     .filter(event => event.payload.action === 'opened')
     .value()
 
+  const mergedPullRequests = chain(events)
+    .filter(event => event.type === 'PullRequestEvent')
+    .filter(event => event.payload.action === 'closed')
+    .filter(event => event.payload.pull_request?.merged)
+    .value()
+
   const closedPullRequests = chain(events)
     .filter(event => event.type === 'PullRequestEvent')
     .filter(event => event.payload.action === 'closed')
+    .filter(event => !event.payload.pull_request?.merged)
     .value()
 
   const context = {
@@ -62,6 +69,7 @@ async function main () {
     closedIssues,
     openedIssues,
     openedPullRequests,
+    mergedPullRequests,
     closedPullRequests
   }
 
