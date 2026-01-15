@@ -46,22 +46,20 @@ async function main () {
     .filter(event => event.payload.action === 'opened')
     .value()
 
-  const openedPullRequests = chain(events)
+  // Categorize PRs by their current state (not just the event action)
+  const allPREvents = chain(events)
     .filter(event => event.type === 'PullRequestEvent')
     .filter(event => event.payload.action === 'opened')
     .value()
 
-  const mergedPullRequests = chain(events)
-    .filter(event => event.type === 'PullRequestEvent')
-    .filter(event => event.payload.action === 'closed')
-    .filter(event => event.payload.pull_request?.merged)
-    .value()
+  const openedPullRequests = allPREvents
+    .filter(event => event.payload.pull_request?.state === 'open')
 
-  const closedPullRequests = chain(events)
-    .filter(event => event.type === 'PullRequestEvent')
-    .filter(event => event.payload.action === 'closed')
-    .filter(event => !event.payload.pull_request?.merged)
-    .value()
+  const mergedPullRequests = allPREvents
+    .filter(event => event.payload.pull_request?.merged)
+
+  const closedPullRequests = allPREvents
+    .filter(event => event.payload.pull_request?.state === 'closed' && !event.payload.pull_request?.merged)
 
   const context = {
     eventTypes,
