@@ -16,5 +16,6 @@
   "scripts": {
     "test": "standard"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/github-modules/recent-github-activity"
 }
