@@ -9,7 +9,6 @@ const username = args[0]
 main()
 
 async function main () {
-
   if (!username) {
     console.error('Usage: github-recent-activity <username>')
     process.exit(0)

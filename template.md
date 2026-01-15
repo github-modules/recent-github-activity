@@ -7,7 +7,7 @@
 ## Closed Pull Requests
 
 {%- for event in closedPullRequests %}
-- [{{event.repo.name}}#{{event.payload.pull_request.number}}]({{ event.payload.pull_request.html_url }}) {{ event.payload.pull_request.title }} - {{event.timeago}}
+- [{{event.repo.name}}#{{event.payload.number}}](https://github.com/{{ event.repo.name }}/pull/{{ event.payload.number }}) {{ event.payload.pull_request.title }} - {{event.timeago}}
 {%- endfor %}
 
 ## Opened Issues
@@ -19,5 +19,5 @@
 ## Opened Pull Requests
 
 {%- for event in openedPullRequests %}
-- [{{event.repo.name}}#{{event.payload.pull_request.number}}]({{ event.payload.pull_request.html_url }}) {{ event.payload.pull_request.title }} - {{event.timeago}}
+- [{{event.repo.name}}#{{event.payload.number}}](https://github.com/{{ event.repo.name }}/pull/{{ event.payload.number }}) {{ event.payload.pull_request.title }} - {{event.timeago}}
 {%- endfor %}
